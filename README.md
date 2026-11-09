@@ -4,7 +4,7 @@
 
 **JS Reverse Engineering Cases**
 
-Web 端加密参数逆向 · 爬虫数据采集实战案例库
+Web 端加密参数逆向 · 实战案例库
 
 </div>
 
@@ -12,12 +12,9 @@ Web 端加密参数逆向 · 爬虫数据采集实战案例库
 
 ## 📖 项目简介
 
-本项目是一个 **JavaScript 逆向工程实战案例集**，记录了多个真实平台的前端加密参数分析与数据采集过程。每个案例均包含：
+本项目是一个 **JavaScript 逆向工程实战案例库**，收录了多个真实平台的加密参数分析与还原过程。
 
-- 目标平台信息与接口分析
-- 加密参数定位与算法还原
-- JavaScript 算法实现（Node.js 执行环境）
-- Python 爬虫采集脚本
+每个案例独立成目录，记录了从**接口定位 → 加密参数识别 → 算法还原 → 采集实现**的完整链路。案例之间互不依赖，可单独阅读与参考。
 
 > **声明**：本项目仅供学习研究与技术交流使用，不得用于任何商业用途或非法用途。所有案例均针对公开可访问的接口进行分析，不涉及任何用户隐私数据采集。
 
@@ -25,84 +22,33 @@ Web 端加密参数逆向 · 爬虫数据采集实战案例库
 
 ## 🗂️ 案例索引
 
-| 编号 | 平台名称 | 加密参数 | 算法类型 | 状态 |
+| 编号 | 平台名称 | 加密参数 | 防护类型 | 状态 |
 |:---:|:---|:---|:---|:---:|
-| P001 | 螃蟹账号交易平台 | `timestamp__1366` | 阿里云 WAF 动态签名（LZ 压缩 + 自定义编码） | ✅ |
+| P001 | 螃蟹账号交易平台 | `timestamp__1366` | 阿里云 WAF 动态签名 | ✅ |
 | P002 | 盼之代售 | — | — | 📝 待补充 |
 | P003 | 7881 账号交易平台 | `lb-sign` / `lb-timestamp` | MD5 哈希签名 | ✅ |
 
 ---
 
-## 📂 项目结构
+## 📂 目录结构
 
 ```
 JS逆向项目/
-├── .gitignore                    # Git 忽略规则
-├── package.json                  # Node.js 依赖声明（crypto-js）
-├── README.md                     # 项目文档（本文件）
 │
 ├── P001_螃蟹账号交易平台/
-│   ├── config.yaml               # 采集配置（数据库/Redis/应用参数）
-│   ├── P001.js                   # 加密算法 JS 实现（execjs 调用）
-│   └── P001.py                   # 爬虫主程序（采集 + 入库 + 去重）
+│   ├── config.yaml        # 采集配置（数据库/Redis/应用参数）
+│   ├── P001.js            # 加密算法 JS 实现（execjs 调用）
+│   └── P001.py            # 采集主程序（签名生成 + 采集 + 入库去重）
 │
 ├── P002_盼之代售/
 │   └── (待补充)
 │
 └── P003_7881账号交易平台/
-    ├── config.yaml               # 采集配置
-    └── P003.py                   # 爬虫主程序（MD5 签名生成 + 采集）
+    ├── config.yaml        # 采集配置
+    └── P003.py            # 采集主程序（MD5 签名生成 + 采集）
 ```
 
----
-
-## 🔧 技术栈
-
-| 分类 | 技术 |
-|:---|:---|
-| **算法执行** | Node.js + `crypto-js`、Python `execjs` |
-| **爬虫框架** | `requests` |
-| **数据存储** | MySQL（`pymysql`）、Redis（`redis`） |
-| **配置管理** | `yaml` |
-| **日志系统** | `loguru` |
-
----
-
-## 🚀 快速开始
-
-### 1. 环境准备
-
-**Node.js 依赖安装：**
-
-```bash
-npm install
-```
-
-**Python 依赖安装：**
-
-```bash
-pip install requests pymysql redis pyyaml loguru pyexecjs
-```
-
-### 2. 配置修改
-
-进入对应案例目录，编辑 `config.yaml`，将数据库密码等配置修改为你的本地环境值：
-
-```yaml
-mysql:
-  host: "127.0.0.1"
-  port: 3306
-  user: "root"
-  password: "your_password_here"    # ← 修改为你的实际密码
-  database: "crawler"
-```
-
-### 3. 运行采集
-
-```bash
-cd P001_螃蟹账号交易平台
-python P001.py
-```
+> 每个案例目录内的文件即该案例的全部产物，不涉及跨案例的公共依赖或共享配置。根目录 `package.json` 仅声明 `crypto-js` 依赖，供 P001 的 JS 算法执行使用。
 
 ---
 
@@ -115,6 +61,7 @@ python P001.py
 <tr><td><b>数据接口</b></td><td><code>https://api-pc.pxb7.com/api/bff/web/product/search/productPage</code></td></tr>
 <tr><td><b>加密参数</b></td><td>查询字符串 <code>timestamp__1366</code></td></tr>
 <tr><td><b>防护类型</b></td><td>阿里云 WAF（动态令牌 + 请求签名）</td></tr>
+<tr><td><b>涉及文件</b></td><td><code>P001.js</code>（算法）、<code>P001.py</code>（采集）</td></tr>
 </table>
 
 **算法流程：**
@@ -136,6 +83,7 @@ python P001.py
 <tr><td><b>数据接口</b></td><td><code>https://gw.7881.com/goods-service-api/api/goods/list</code></td></tr>
 <tr><td><b>加密参数</b></td><td>请求头 <code>lb-sign</code>、<code>lb-timestamp</code></td></tr>
 <tr><td><b>防护类型</b></td><td>自定义 MD5 哈希签名</td></tr>
+<tr><td><b>涉及文件</b></td><td><code>P003.py</code>（签名 + 采集）</td></tr>
 </table>
 
 **算法流程：**
