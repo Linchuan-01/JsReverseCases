@@ -27,7 +27,7 @@ Web 端加密参数逆向 · 爬虫数据采集实战案例库
 
 | 编号 | 平台名称 | 加密参数 | 算法类型 | 状态 |
 |:---:|:---|:---|:---|:---:|
-| P001 | 螃蟹账号交易平台 | `timestamp__1366` | 瑞数 WAF 动态签名（LZ 压缩 + 自定义编码） | ✅ |
+| P001 | 螃蟹账号交易平台 | `timestamp__1366` | 阿里云 WAF 动态签名（LZ 压缩 + 自定义编码） | ✅ |
 | P002 | 盼之代售 | — | — | 📝 待补充 |
 | P003 | 7881 账号交易平台 | `lb-sign` / `lb-timestamp` | MD5 哈希签名 | ✅ |
 
@@ -114,7 +114,7 @@ python P001.py
 <tr><td><b>目标页面</b></td><td><code>https://www.pxb7.com/buy/10013/1</code></td></tr>
 <tr><td><b>数据接口</b></td><td><code>https://api-pc.pxb7.com/api/bff/web/product/search/productPage</code></td></tr>
 <tr><td><b>加密参数</b></td><td>查询字符串 <code>timestamp__1366</code></td></tr>
-<tr><td><b>防护类型</b></td><td>瑞数 WAF（动态令牌 + 请求签名）</td></tr>
+<tr><td><b>防护类型</b></td><td>阿里云 WAF（动态令牌 + 请求签名）</td></tr>
 </table>
 
 **算法流程：**
