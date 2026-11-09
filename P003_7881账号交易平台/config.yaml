@@ -1,0 +1,26 @@
+
+# 配置文件
+app:
+  name: "7881账号交易平台"
+  description: "7881账号交易平台"
+  gameId: "A5776"
+  gtid: "100003"
+  pages: 10
+  debug: true
+
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  db: 0
+
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "your_password_here"
+  database: "crawler"
+  charset: "utf8mb4"
+  timeout: 10

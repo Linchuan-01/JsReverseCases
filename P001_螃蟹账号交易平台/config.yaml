@@ -1,0 +1,28 @@
+
+# 配置文件
+app:
+  name: "螃蟹账号交易平台"
+  version: "1.0.0"
+  description: "螃蟹账号交易平台"
+  device_id: "7d84102d-11fc-426c-97df-36006bde3f21"
+  gio_device: "f9f99ddb-546e-4e57-9bc6-9a4eaec6b899"
+  gameId: "10013"
+  pages: 10
+  debug: true
+
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  db: 0
+
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "your_password_here"
+  database: "crawler"
+  charset: "utf8mb4"
+  timeout: 10
