@@ -55,6 +55,66 @@ class P001(object):
         self._gameId = config['app']['gameId']
         self.pages = config['app']['pages']
 
+    @staticmethod
+    def _load_config(filename, env=None):
+        """
+        加载配置文件
+        :return: 配置数据
+        """
+        filename = os.path.join(filename, 'config.yaml')
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"配置文件不存在：{filename}")
+        with open(filename, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+        return config
+
+    @staticmethod
+    def _load_JavaScript(filename):
+        """
+        加载JavaScript代码文件
+        :param filename: JavaScript代码文件路径
+        :return: JavaScript代码
+        """
+        filename = os.path.join(filename, 'P005.js')
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"JavaScript代码文件不存在：{filename}")
+        with open(filename, 'r', encoding='utf-8') as f:
+            return f.read()
+
+    @staticmethod
+    def _parse_data(json_data):
+        """
+        解析数据
+        :param json_data: 接口返回的JSON数据
+        :return:
+        """
+        items = list()
+        datas = json_data.get("data", {}).get("list", [])
+        for data in datas:
+            item = dict()
+            _gameId = data.get("productBasicInfo", {}).get("gameId", "")
+            productId = data.get("productBasicInfo", {}).get("productId", "")
+            productUniqueNo = data.get("productBasicInfo", {}).get("productUniqueNo", "")
+            gameName = data.get("productBasicInfo", {}).get("gameName", "")
+            price = data.get("productPriceInfo", {}).get("price", 0) / 100
+            attrNameList = data.get("attrNameList", [])
+            smallImgShowTitle = data.get("productBasicInfo", {}).get("smallImgShowTitle", "")
+            showTitle = data.get("productBasicInfo", {}).get("showTitle", "")
+            createTime = data.get("productBasicInfo", {}).get("createTime", "")
+            detailLink = "https://www.pxb7.com/product/{}/1".format(productId)
+            item["_gameId"] = _gameId
+            item["productId"] = productId
+            item["productUniqueNo"] = productUniqueNo
+            item["gameName"] = gameName
+            item["price"] = price
+            item["attrNameList"] = attrNameList
+            item["smallImgShowTitle"] = smallImgShowTitle
+            item["showTitle"] = showTitle
+            item["createTime"] = createTime
+            item["detailLink"] = detailLink
+            items.append(item)
+        return items
+
     def _connect_mysql(self):
         """
         连接MySQL数据库
@@ -250,65 +310,7 @@ class P001(object):
             raise
 
 
-    @staticmethod
-    def _load_config(filename, env=None):
-        """
-        加载配置文件
-        :return: 配置数据
-        """
-        filename = os.path.join(filename, 'config.yaml')
-        if not os.path.exists(filename):
-            raise FileNotFoundError(f"配置文件不存在：{filename}")
-        with open(filename, 'r', encoding='utf-8') as f:
-            config = yaml.safe_load(f)
-        return config
 
-    @staticmethod
-    def _load_JavaScript(filename):
-        """
-        加载JavaScript代码文件
-        :param filename: JavaScript代码文件路径
-        :return: JavaScript代码
-        """
-        filename = os.path.join(filename, 'P001.js')
-        if not os.path.exists(filename):
-            raise FileNotFoundError(f"JavaScript代码文件不存在：{filename}")
-        with open(filename, 'r', encoding='utf-8') as f:
-            return f.read()
-
-    @staticmethod
-    def _parse_data(json_data):
-        """
-        解析数据
-        :param json_data: 接口返回的JSON数据
-        :return:
-        """
-        items = list()
-        datas = json_data.get("data", {}).get("list", [])
-        for data in datas:
-            item = dict()
-            _gameId = data.get("productBasicInfo", {}).get("gameId", "")
-            productId = data.get("productBasicInfo", {}).get("productId", "")
-            productUniqueNo = data.get("productBasicInfo", {}).get("productUniqueNo", "")
-            gameName = data.get("productBasicInfo", {}).get("gameName", "")
-            price = data.get("productPriceInfo", {}).get("price", 0) / 100
-            attrNameList = data.get("attrNameList", [])
-            smallImgShowTitle = data.get("productBasicInfo", {}).get("smallImgShowTitle", "")
-            showTitle = data.get("productBasicInfo", {}).get("showTitle", "")
-            createTime = data.get("productBasicInfo", {}).get("createTime", "")
-            detailLink = "https://www.pxb7.com/product/{}/1".format(productId)
-            item["_gameId"] = _gameId
-            item["productId"] = productId
-            item["productUniqueNo"] = productUniqueNo
-            item["gameName"] = gameName
-            item["price"] = price
-            item["attrNameList"] = attrNameList
-            item["smallImgShowTitle"] = smallImgShowTitle
-            item["showTitle"] = showTitle
-            item["createTime"] = createTime
-            item["detailLink"] = detailLink
-            items.append(item)
-        return items
 
     def _get_dynamic_token(self):
         """
@@ -368,7 +370,7 @@ class P001(object):
         if self.rds:
             self.rds.close()
 
-    def main(self):
+    def run(self):
         """
         主方法入口
         """
@@ -394,4 +396,4 @@ class P001(object):
 
 if __name__ == '__main__':
     p001 = P001()
-    p001.main()
+    p001.run()

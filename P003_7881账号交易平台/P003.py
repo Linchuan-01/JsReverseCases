@@ -123,7 +123,7 @@ class P003(object):
         response = requests.post(self.BASE_URL, headers=self.headers, data=json_data_str)
         return response.json()
 
-    def main(self):
+    def run(self):
         """
         主方法入口
         """
@@ -135,4 +135,4 @@ class P003(object):
 
 if __name__ == '__main__':
     p003 = P003()
-    p003.main()
+    p003.run()

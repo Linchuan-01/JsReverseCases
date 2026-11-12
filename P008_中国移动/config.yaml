@@ -1,0 +1,17 @@
+
+# 配置文件
+app:
+  name: "中国移动登录"
+  description: "中国移动登录"
+  TIMEOUT: 10
+  debug: true
+
+
+phone:
+  USER_NAME: "bf39f30ac1e7337c5c16c0b2b85ab73cb7ac74d8634ee7fa"
+  PASS_WORD: "58c9d0d66ff299af386205d32cbd37a58389cc28e951f574f5fd2d08a29399a5a0268b70b2d7a80d879a8b2c2cc83d8d"
+
+
+
+
+

@@ -1,0 +1,11 @@
+
+# 配置文件
+app:
+  name: "中国临床试验注册中心"
+  description: "中国临床试验注册中心"
+  pages: 10
+  TIMEOUT: 10
+  debug: true
+
+
+

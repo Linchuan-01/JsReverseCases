@@ -1,0 +1,13 @@
+
+# 配置文件
+app:
+  name: "MCE药物筛选平台"
+  description: "MCE药物筛选平台"
+  pages: 1
+  seach_key: "CAS"
+  save_dir: "CAS药物"
+  TIMEOUT: 10
+  debug: true
+
+
+

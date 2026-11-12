@@ -1,0 +1,12 @@
+
+# 配置文件
+app:
+  name: "哲风壁纸"
+  description: "哲风壁纸图片下载"
+  pages: 10
+  save_dir: "手机壁纸"
+  wpType: "2,5,6,8"      # 壁纸类型
+  debug: true
+
+
+

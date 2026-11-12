@@ -1,0 +1,18 @@
+
+# 配置文件
+app:
+  name: "咸鱼二手交易平台"
+  description: "咸鱼二手交易平台"
+  TIMEOUT: 10
+  pages: 5
+  keyword: "手机"
+  appKey: "34839810"
+  debug: true
+
+
+
+
+
+
+
+
