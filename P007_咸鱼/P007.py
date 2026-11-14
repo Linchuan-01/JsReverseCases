@@ -25,20 +25,15 @@ class P007(object):
         "referer": "https://www.goofish.com/",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0"
     }
-    COOKIES = {
-        "cookie2": "159acc1e7a82ac1e5286fcbd5395111b",
-        # "tfstk": "gZCZn-2hI5Fw9HmQ1Mdq4rN-NjA9aIr73stXoZbD5hxi1ficLgjpft66fqWFmMp6jha9gKjcjiJYWntD0i_cCyN7NNQ9MIx4V7NSx2t9nGoMSK4DtELaRFcdh5UXMIq7AvGDB7RAjb8M1hb38ETjsjjDIeAHvElmIixMKDYyyIxcmixh-UYrncDisvxHvEADSixMxy8XxFADiib38EhY5nxSTUJg-VGeS6kF5d-lSHlPJ6Yil3NJvjxl9FpNiO-eRe1e7d-knoGhe1jCo119p8HWMw6P0tj3TfSVSTjDf6qogn6JuZYyZ73yx17VTdBIjAYy_hJlsp0SOwvcL6R1soHRRw-MUB6Qpl9X_GWJ2d2Lvi7efifwKcrBcT_CspSuAXSv3Ojw-QjyWmLnK5CAQmD2IeLeVyzUlNlOpBzKRYHxHdBp83aTWxHvIeLeVyzEHxp99e-7WPC.."
-    }
-
     def __init__(self):
         """
         初始化方法
         """
         self.session = requests.session()
         self.headers = self.HEADERS
-        self.session.cookies.update(self.COOKIES)
         self.timestamp = str(int(time.time() * 1000))
         config = self._load_config(os.path.dirname(__file__))
+        self.session.cookies.update(config.get("cookie") or {})
         self.keyword = config["app"]["keyword"]
         self.pages = config["app"]["pages"]
         self.appKey = config["app"]["appKey"]
@@ -53,7 +48,25 @@ class P007(object):
         if not os.path.exists(path):
             raise FileNotFoundError(f"配置文件不存在：{path}")
         with open(path, "r", encoding="utf-8") as f:
-            return yaml.safe_load(f)
+            config = yaml.safe_load(f) or {}
+        local_path = os.path.join(filename, "config.local.yaml")
+        if os.path.exists(local_path):
+            with open(local_path, "r", encoding="utf-8") as f:
+                config = P007._deep_merge(config, yaml.safe_load(f) or {})
+        return config
+
+    @staticmethod
+    def _deep_merge(base, override):
+        """
+        递归合并本地配置，覆盖同名键
+        """
+        result = dict(base)
+        for key, value in override.items():
+            if isinstance(value, dict) and isinstance(result.get(key), dict):
+                result[key] = P007._deep_merge(result[key], value)
+            else:
+                result[key] = value
+        return result
 
     @staticmethod
     def _parse_data(json_data):

@@ -7,9 +7,10 @@ app:
   debug: true
 
 
+# 真实凭证写入 config.local.yaml（已被 .gitignore 忽略）
 phone:
-  USER_NAME: "bf39f30ac1e7337c5c16c0b2b85ab73cb7ac74d8634ee7fa"
-  PASS_WORD: "58c9d0d66ff299af386205d32cbd37a58389cc28e951f574f5fd2d08a29399a5a0268b70b2d7a80d879a8b2c2cc83d8d"
+  USER_NAME: "your_haozhuma_user"
+  PASS_WORD: "your_haozhuma_pass"
 
 
 

@@ -9,6 +9,10 @@ app:
   appKey: "34839810"
   debug: true
 
+# 真实 Cookie 写入 config.local.yaml（已被 .gitignore 忽略）
+cookie:
+  cookie2: "your_cookie2"
+
 
 
 

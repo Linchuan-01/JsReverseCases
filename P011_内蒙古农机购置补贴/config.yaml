@@ -1,11 +1,10 @@
 
 # 配置文件
 app:
-  name: "信用中国"
-  description: "信用中国（高频失信经营主体信息公示）"
+  name: "内蒙古农机购置补贴"
+  description: "内蒙古农机购置补贴"
   pages: 10
   timeout: 30
-  captcha_retry_count: 3
   debug: true
 
 

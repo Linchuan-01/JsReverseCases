@@ -1,11 +1,36 @@
 
 # 配置文件
 app:
-  name: "内蒙古农机购置补贴"
-  description: "内蒙古农机购置补贴"
+  name: "艺龙旅行网（同程旅行）"
+  description: "艺龙旅行网（同程旅行）"
+  csv_path: "艺龙.csv"
+  deviceid: "488d8d00-785d-45c9-8f9f-f28b7745293a"
   pages: 10
   timeout: 30
+  inDate: "2026-11-26"
+  outDate: "2026-11-27"
+  city: "0101"
   debug: true
+
+# 真实 Cookie 写入 config.local.yaml（已被 .gitignore 忽略）
+cookie:
+  H5CookieId: 'your_h5_cookie_id'
+  Hm_lvt_c6a93e2a75a5b1ef9fb5d4553a2226e5: 'your_hm_lvt'
+  firsttime: 'your_firsttime'
+  AKA_A2: 'your_aka_a2'
+  qdid: 'your_qdid'
+  '17uCNRefId': 'your_ref_id'
+  TicketSEInfo: 'your_ticket_se_info'
+  CNSEInfo: 'your_cnse_info'
+  route: 'your_route'
+  x-user-dun: 'your_x_user_dun'
+  H5Channel: 'your_h5_channel'
+  lasttime: 'your_lasttime'
+  RT: 'your_rt'
+  JSESSIONID: 'your_jsessionid'
+
+
+
 
 
 

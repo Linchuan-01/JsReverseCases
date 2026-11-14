@@ -81,7 +81,25 @@ class P008(object):
         if not os.path.exists(path):
             raise FileNotFoundError(f"配置文件不存在：{path}")
         with open(path, "r", encoding="utf-8") as f:
-            return yaml.safe_load(f)
+            config = yaml.safe_load(f) or {}
+        local_path = os.path.join(filename, "config.local.yaml")
+        if os.path.exists(local_path):
+            with open(local_path, "r", encoding="utf-8") as f:
+                config = P008._deep_merge(config, yaml.safe_load(f) or {})
+        return config
+
+    @staticmethod
+    def _deep_merge(base, override):
+        """
+        递归合并本地配置，覆盖同名键
+        """
+        result = dict(base)
+        for key, value in override.items():
+            if isinstance(value, dict) and isinstance(result.get(key), dict):
+                result[key] = P008._deep_merge(result[key], value)
+            else:
+                result[key] = value
+        return result
 
     @staticmethod
     def _read_image(source):
