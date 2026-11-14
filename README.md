@@ -35,6 +35,7 @@ Web 端加密参数逆向 · 实战案例库
 | P009 | vivo 官网 | — | — | 📝 待补充 |
 | P010 | 信用中国 | Cookie | 瑞数 6 代 + 字符验证码 | ✅ |
 | P011 | 内蒙古农机购置补贴 | `sign` / `timestamp` / `data` | SM3 + SM4 国密加密 | ✅ |
+| P012 | 丰巢快递柜 | `sign` / 登录 `password` | 滑块验证码 + MD5/AES + RSA | ✅ |
 | P014 | 艺龙旅行网（同程旅行） | `user-dun` / `traceToken` | JS 风控指纹 | ✅ |
 
 > 每个案例目录下统一包含：`Pxxx.py`（采集实现）、`Pxxx.js`（还原后的加密逻辑，如涉及）、`config.yaml`（运行配置）。
