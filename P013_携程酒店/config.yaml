@@ -1,0 +1,19 @@
+
+# 配置文件
+app:
+  name: "携程酒店"
+  description: "携程酒店"
+  timeout: 10
+  pages: 10
+  checkIn: "2026/11/20"
+  checkOut: "2026/11/21"
+  checkInDate: "20261120"
+  checkOutDate: "20261121"
+  debug: true
+
+
+
+
+
+
+
