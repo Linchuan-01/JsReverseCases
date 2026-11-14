@@ -52,8 +52,4 @@ Web 端加密参数逆向 · 实战案例库
 请在遵守目标网站 robots.txt 及相关法律法规的前提下使用。
 ```
 
----
 
-## 📄 License
-
-本项目采用 [MIT License](LICENSE) 开源协议。
